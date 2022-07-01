@@ -926,7 +926,7 @@
             %-  sham
             :+  ~  author.p.post.n
             [time-sent.p.post.n contents.p.post.n]
-          =?  signatures.p.post.n  changed  ~
+          =?  signatures.p.post.n  |(.^(? %j /[(scot %p our.bol)]/fake/[(scot %da now.bol)]) changed)  ~
           %+  ~(put by q)  index.p.post.n  n
         ==
 
