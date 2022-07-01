@@ -34,6 +34,7 @@
           fol=path                                       ::  - clay path to import folder
           gro=(each resource term)                       ::  - group in which to place new resource, or name for new group
           wer=term                                       ::  - new resource name - we'll make it for you
+          old-rid=(unit resource)
       ==
     ::
       [%permit per=(set ship) rys=resources]             ::  permit subscribers to some resources

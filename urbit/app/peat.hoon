@@ -94,7 +94,7 @@
           (cancel:pete:hc res.pete)
             %import
           ?>  (team:title our.bowl src.bowl)  
-          (import:pete:hc fol.pete gro.pete wer.pete)
+          (import:pete:hc fol.pete gro.pete wer.pete old-rid.pete)
         ::
             %permit
           ?>  (team:title our.bowl src.bowl)  
@@ -776,7 +776,7 @@
     ==
   ::
   ++  import
-    |=  [f=path g=(each resource @tas) n=@tas]
+    |=  [f=path g=(each resource @tas) n=@tas old-rid=(unit resource)]
     |^  ^-  (quip card _state)
     :: ~>  %bout.[0 'import-pete']
       =/  arc=arch  (arc-s:pek:pl f)
@@ -801,14 +801,14 @@
        ;:  welp
          (add-to-new-group:biz:pl [our.bol n] sap p.g)
          (web-do [our.bol p.g] [our.bol n] f)
-         (imp-do dis [our.bol p.g] [our.bol n])
+         (imp-do dis [our.bol p.g] [our.bol n] old-rid)
         ==
        ::
       ?>  (~(has in groups:pek:pl) p.g)
       ;:  welp
         (add-to-old-group:biz:pl [our.bol n] sap p.g)
         (web-do p.g [our.bol n] f)
-        (imp-do dis p.g [our.bol n])
+        (imp-do dis p.g [our.bol n] old-rid)
       ==
     ++  web-do
       |=  [g=resource r=resource f=path]
@@ -880,7 +880,7 @@
         ==
       ==
     ++  imp-do
-      |=  [p=(list [p=@t q=~]) g=resource r=resource]
+      |=  [p=(list [p=@t q=~]) g=resource r=resource old-rid=(unit resource)]
       :: ~>  %bout.[0 'imp-do-import-pete']
       ^-  (list card)
       =|  q=(map index node:store)
@@ -908,7 +908,26 @@
           %-  ~(uni by q)  ^+  q
           %-  ~(rep by old)
           |=  [[a=atom n=node:store] q=(map index node:store)]
-          ?.(?=(%.y -.post.n) q (~(put by q) index.p.post.n n))
+          ?.  ?=(%.y -.post.n)   q
+          =+  pb=p.post.n
+          =?  contents.p.post.n  ?=(^ old-rid)
+            %+  turn  contents.p.post.n
+            |=  con=content:store
+            ?.  ?=([%reference @ *] con)  con
+            ?.  ?=([%graph [@ @] [[@ @] *]] +.con)  con
+            ?.  =(resource.uid.reference.con u.old-rid)  con
+            =.  group.reference.con  g
+            =.  resource.uid.reference.con  u.old-rid
+            con
+          =/  changed  !=(pb p.post.n)
+          =?  hash.p.post.n  changed
+            ^-  (unit @ux)
+            :-  ~  ;;  @ux
+            %-  sham
+            :+  ~  author.p.post.n
+            [time-sent.p.post.n contents.p.post.n]
+          =?  signatures.p.post.n  changed  ~
+          %+  ~(put by q)  index.p.post.n  n
         ==
 
       %-  malt
