@@ -917,7 +917,7 @@
             ?.  ?=([%graph [@ @] [[@ @] *]] +.con)  con
             ?.  =(resource.uid.reference.con u.old-rid)  con
             =.  group.reference.con  g
-            =.  resource.uid.reference.con  u.old-rid
+            =.  resource.uid.reference.con  r
             con
           =/  changed  !=(pb p.post.n)
           =?  hash.p.post.n  changed
